@@ -1,0 +1,77 @@
+﻿kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: feature/cambios-btt
+    app.openshift.io/vcs-uri: 'https://sourcecode.losheroes.cl/scm/credsuc/credsuc-servicio-btt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  name: credsuc-servicio-btt
+  labels:
+    app: credsuc-servicio-btt
+    app.kubernetes.io/component: credsuc-servicio-btt
+    app.kubernetes.io/instance: credsuc-servicio-btt
+    app.kubernetes.io/name: credsuc-servicio-btt
+    app.kubernetes.io/part-of: credsuc-servicio-btt
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - credsuc-servicio-btt
+        from:
+          kind: ImageStreamTag
+          name: 'credsuc-servicio-btt:latest'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/dev-prueba-doc/credsuc-servicio-btt@sha256:d8861f21aabb9a6aa15198482d9566bf78042dcf5901be2388eb56af40dcc1f1
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: credsuc-servicio-btt
+    deploymentconfig: credsuc-servicio-btt
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: credsuc-servicio-btt
+        deploymentconfig: credsuc-servicio-btt
+    spec:
+      containers:
+        - name: credsuc-servicio-btt
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/dev-prueba-doc/credsuc-servicio-btt@sha256:d8861f21aabb9a6aa15198482d9566bf78042dcf5901be2388eb56af40dcc1f1
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: credsucurconfig
+            - configMapRef:
+                name: credsuc-configmap-logger
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

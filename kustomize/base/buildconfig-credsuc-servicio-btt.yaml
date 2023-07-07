@@ -1,0 +1,63 @@
+﻿kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: feature/cambios-btt
+    app.openshift.io/vcs-uri: 'https://sourcecode.losheroes.cl/scm/credsuc/credsuc-servicio-btt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  name: credsuc-servicio-btt
+  labels:
+    app: credsuc-servicio-btt
+    app.kubernetes.io/component: credsuc-servicio-btt
+    app.kubernetes.io/instance: credsuc-servicio-btt
+    app.kubernetes.io/name: credsuc-servicio-btt
+    app.kubernetes.io/part-of: credsuc-servicio-btt
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'credsuc-servicio-btt:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java:openjdk-8-el7'
+      env:
+        - name: env
+          value: '1'
+        - name: env2
+          value: '2'
+        - name: env3
+          value: '3'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://sourcecode.losheroes.cl/scm/credsuc/credsuc-servicio-btt.git'
+      ref: feature/cambios-btt
+    contextDir: /
+    sourceSecret:
+      name: bitbucket
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: credsuc-servicio-btt-generic-webhook-secret
+    - type: Bitbucket
+      bitbucket:
+        secretReference:
+          name: credsuc-servicio-btt-bitbucket-webhook-secret
+    - type: ImageChange
+      imageChange:
+        lastTriggeredImageID: >-
+          image-registry.openshift-image-registry.svc:5000/openshift/java@sha256:c2b381c70928b4144bdc960d330877983736b34466c7b6f6341be6fe2b168b6f
+    - type: ConfigChange
+  runPolicy: Serial

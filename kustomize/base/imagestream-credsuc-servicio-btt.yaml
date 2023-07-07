@@ -1,0 +1,33 @@
+﻿kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: feature/cambios-btt
+    app.openshift.io/vcs-uri: 'https://sourcecode.losheroes.cl/scm/credsuc/credsuc-servicio-btt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+  name: credsuc-servicio-btt
+  labels:
+    app: credsuc-servicio-btt
+    app.kubernetes.io/component: credsuc-servicio-btt
+    app.kubernetes.io/instance: credsuc-servicio-btt
+    app.kubernetes.io/name: credsuc-servicio-btt
+    app.kubernetes.io/part-of: credsuc-servicio-btt
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: >-
+    image-registry.openshift-image-registry.svc:5000/dev-prueba-doc/credsuc-servicio-btt
+  publicDockerImageRepository: >-
+    default-route-openshift-image-registry.apps.ocp-noprod.cclh.int/dev-prueba-doc/credsuc-servicio-btt
+  tags:
+    - tag: latest
+      items:
+        - created: '2023-01-26T18:31:40Z'
+          dockerImageReference: >-
+            image-registry.openshift-image-registry.svc:5000/dev-prueba-doc/credsuc-servicio-btt@sha256:d8861f21aabb9a6aa15198482d9566bf78042dcf5901be2388eb56af40dcc1f1
+          image: >-
+            sha256:d8861f21aabb9a6aa15198482d9566bf78042dcf5901be2388eb56af40dcc1f1
+          generation: 1

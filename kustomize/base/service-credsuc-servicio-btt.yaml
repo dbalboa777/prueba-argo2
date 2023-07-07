@@ -1,0 +1,41 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: credsuc-servicio-btt
+  labels:
+    app: credsuc-servicio-btt
+    app.kubernetes.io/component: credsuc-servicio-btt
+    app.kubernetes.io/instance: credsuc-servicio-btt
+    app.kubernetes.io/name: credsuc-servicio-btt
+    app.kubernetes.io/part-of: credsuc-servicio-btt
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+  annotations:
+    app.openshift.io/vcs-ref: feature/cambios-btt
+    app.openshift.io/vcs-uri: 'https://sourcecode.losheroes.cl/scm/credsuc/credsuc-servicio-btt.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: 8778-tcp
+      protocol: TCP
+      port: 8778
+      targetPort: 8778
+  selector:
+    app: credsuc-servicio-btt
+    deploymentconfig: credsuc-servicio-btt
+  clusterIP: 172.30.245.156
+  clusterIPs:
+    - 172.30.245.156
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack

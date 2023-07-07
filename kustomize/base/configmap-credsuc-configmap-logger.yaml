@@ -1,0 +1,10 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: credsuc-configmap-logger
+data:
+  url.endpoint.servicio.logger: >-
+    http://credsuc-servicio-loggermanager-dev-credito-sucursal.apps.ocp-noprod.cclh.int
+  url.endpoint.servicio.logger.path: /loggerMongoDB
+  url.endpoint.servicio.urlLogger: >-
+    ${url.endpoint.servicio.logger}${request.mapping}${url.endpoint.servicio.logger.path}

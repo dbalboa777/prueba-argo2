@@ -1,0 +1,23 @@
+﻿kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: credsuc-servicio-btt
+  labels:
+    app: credsuc-servicio-btt
+    app.kubernetes.io/component: credsuc-servicio-btt
+    app.kubernetes.io/instance: credsuc-servicio-btt
+    app.kubernetes.io/name: credsuc-servicio-btt
+    app.kubernetes.io/part-of: credsuc-servicio-btt
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-8-el7
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: credsuc-servicio-btt-dev-prueba-doc.apps.ocp-noprod.cclh.int
+  to:
+    kind: Service
+    name: credsuc-servicio-btt
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

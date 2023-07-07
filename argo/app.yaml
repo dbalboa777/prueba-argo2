@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prueba-doc
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: dev-prueba-doc
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    directory:
+      recurse: true
+    path: main
+    repoURL: https://sourcecode.losheroes.cl/scm/tesdesarg/prueba-argo.git
+    targetRevision: HEAD
+    sourceType: Kustomize
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
