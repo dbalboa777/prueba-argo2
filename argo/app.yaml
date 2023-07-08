@@ -12,7 +12,7 @@ spec:
     directory:
       recurse: true
     path: main
-    repoURL: https://sourcecode.losheroes.cl/scm/tesdesarg/prueba-argo.git
+    repoURL: https://github.com/dbalboa777/prueba-argo2.git
     targetRevision: HEAD
     sourceType: Kustomize
   syncPolicy:
