@@ -11,7 +11,7 @@ spec:
   source:
     directory:
       recurse: true
-    path: main
+    path: config/overlays/dev
     repoURL: https://github.com/dbalboa777/prueba-argo2.git
     targetRevision: HEAD
     sourceType: Kustomize
