@@ -9,6 +9,6 @@ patches:
 - patch: |-
     - op: replace
       path: /spec/host
-      value: credsuc-servicio-btt-dev-prueba-doc.apps.ocp-noprod.cclh.int
+      value: credsuc-servicio-btt-qa-prueba-doc.apps.ocp-noprod.cclh.int
   target:
     kind: Route
